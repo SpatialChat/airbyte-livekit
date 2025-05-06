@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique identifier for the event"
+    },
+    "room_id": {
+      "type": ["string", "null"],
+      "description": "Identifier of the room related to this event (if applicable)"
+    },
+    "participant_id": {
+      "type": ["string", "null"],
+      "description": "Identifier of the participant related to this event (if applicable)"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of when the event occurred (in milliseconds since epoch)"
+    },
+    "event_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the event"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Type of event that occurred"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["info", "warning", "error", "critical"],
+      "description": "Severity level of the event"
+    },
+    "message": {
+      "type": "string",
+      "description": "Description of the event"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata associated with the event"
+    },
+    "source": {
+      "type": "string",
+      "description": "Source of the event (component that generated it)"
+    },
+    "ip_address": {
+      "type": ["string", "null"],
+      "description": "IP address related to the event (if applicable)"
+    },
+    "region": {
+      "type": ["string", "null"],
+      "description": "Geographic region related to the event (if applicable)"
+    }
+  },
+  "required": ["event_id", "timestamp", "event_type"]
+}

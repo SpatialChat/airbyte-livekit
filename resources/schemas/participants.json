@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "participant_id": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "room_id": {
+      "type": "string",
+      "description": "Identifier of the room the participant joined"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of when the record was created (in milliseconds since epoch)"
+    },
+    "identity": {
+      "type": "string",
+      "description": "Identity of the participant"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the participant"
+    },
+    "joined_at": {
+      "type": "string",
+      "format": "date-time", 
+      "description": "ISO 8601 timestamp when the participant joined"
+    },
+    "left_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the participant left (null if still connected)"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the participant's session in seconds"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["joined", "left", "disconnected"],
+      "description": "Current state of the participant"
+    },
+    "is_publisher": {
+      "type": "boolean",
+      "description": "Whether the participant is publishing media"
+    },
+    "is_subscriber": {
+      "type": "boolean",
+      "description": "Whether the participant is subscribing to media"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata associated with the participant"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "User agent information of the participant's client"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IP address of the participant"
+    },
+    "region": {
+      "type": "string",
+      "description": "Geographic region of the participant"
+    }
+  },
+  "required": ["participant_id", "room_id", "timestamp"]
+}

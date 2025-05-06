@@ -9,6 +9,10 @@ This connector allows you to extract data from LiveKit's real-time communication
 - Track quality metrics for communication sessions
 - Gather system events and error logs
 - Monitor billing and usage information
+- Incremental sync support for all streams
+- Comprehensive schema definitions
+- Robust error handling and retry mechanisms
+- Detailed logging for troubleshooting
 
 ## Prerequisites
 
@@ -54,10 +58,25 @@ For self-hosted LiveKit instances, set the `endpoint_url` to your instance's API
    ```bash
    npm install
    ```
-3. Create a `.env` file with your LiveKit credentials
+3. Create a `.env` file with your LiveKit credentials:
+   ```env
+   LIVEKIT_API_KEY=your_api_key
+   LIVEKIT_API_SECRET=your_api_secret
+   LIVEKIT_ENDPOINT_URL=https://your-livekit-endpoint.com
+   ```
 4. Run tests:
    ```bash
+   # Run all tests
    npm test
+   
+   # Run unit tests only
+   npm run test:unit
+   
+   # Run integration tests (requires valid LiveKit credentials)
+   npm run test:integration
+   
+   # Run tests with coverage report
+   npm run test:coverage
    ```
 
 ### Building the Connector
@@ -104,9 +123,30 @@ If you encounter issues:
 /
 ├── Dockerfile              # Container definition
 ├── package.json            # Dependencies and scripts
+├── jest.config.js          # Jest testing configuration
 ├── src/
 │   ├── index.js            # Main entry point
 │   ├── config.js           # Configuration schema and validation
+│   ├── streams/            # Stream implementations
+│   │   ├── base.js         # Base stream class
+│   │   ├── rooms.js        # Rooms stream implementation
+│   │   ├── participants.js # Participants stream implementation
+│   │   ├── quality_metrics.js # Quality metrics stream implementation
+│   │   ├── events.js       # Events stream implementation
+│   │   └── usage.js        # Usage stream implementation
+│   └── utils/              # Utility functions
+├── test/
+│   ├── unit/               # Unit tests
+│   └── integration/        # Integration tests
+└── resources/
+    ├── spec.json           # Connector specification
+    └── schemas/            # JSON schemas for each stream
+        ├── rooms.json      # Room stream schema
+        ├── participants.json # Participants stream schema
+        ├── quality_metrics.json # Quality metrics stream schema
+        ├── events.json     # Events stream schema
+        └── usage.json      # Usage stream schema
+```           # Configuration schema and validation
 │   ├── streams/            # Stream implementations
 │   │   ├── base.js         # Base stream class
 │   │   ├── rooms.js        # Rooms stream implementation

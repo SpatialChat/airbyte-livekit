@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "usage_id": {
+      "type": "string",
+      "description": "Unique identifier for the usage record"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of when the usage record was created (in milliseconds since epoch)"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the usage metrics were collected for"
+    },
+    "resource_type": {
+      "type": "string",
+      "description": "Type of resource being measured"
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measurement (e.g., minutes, GB, count)"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Amount of resource used"
+    },
+    "room_count": {
+      "type": "integer",
+      "description": "Number of rooms active during the period"
+    },
+    "participant_count": {
+      "type": "integer",
+      "description": "Number of participants active during the period"
+    },
+    "participant_minutes": {
+      "type": "number",
+      "description": "Total participant minutes"
+    },
+    "recording_minutes": {
+      "type": "number",
+      "description": "Total recording minutes"
+    },
+    "egress_bandwidth": {
+      "type": "number",
+      "description": "Outbound bandwidth usage in GB"
+    },
+    "ingress_bandwidth": {
+      "type": "number",
+      "description": "Inbound bandwidth usage in GB"
+    },
+    "region": {
+      "type": "string",
+      "description": "Geographic region for this usage data"
+    }
+  },
+  "required": ["usage_id", "timestamp", "date", "resource_type"]
+}

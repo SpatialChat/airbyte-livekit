@@ -1,0 +1,65 @@
+{
+  "documentationUrl": "https://github.com/yourusername/airbyte-plugins/tree/main/livekit",
+  "connectionSpecification": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "LiveKit Source Spec",
+    "type": "object",
+    "required": ["api_key", "api_secret", "endpoint_url", "start_date"],
+    "properties": {
+      "api_key": {
+        "type": "string",
+        "title": "API Key",
+        "description": "The LiveKit API key used for authentication",
+        "airbyte_secret": true,
+        "order": 0
+      },
+      "api_secret": {
+        "type": "string",
+        "title": "API Secret",
+        "description": "The LiveKit API secret used for authentication",
+        "airbyte_secret": true,
+        "order": 1
+      },
+      "project_id": {
+        "type": "string",
+        "title": "Project ID",
+        "description": "The LiveKit project ID (if applicable)",
+        "order": 2
+      },
+      "endpoint_url": {
+        "type": "string",
+        "title": "API Endpoint URL",
+        "description": "The LiveKit API endpoint URL. Use the default for LiveKit Cloud or your custom URL for self-hosted instances.",
+        "default": "https://api.livekit.io",
+        "examples": ["https://api.livekit.io", "https://livekit.yourdomain.com/api"],
+        "order": 3
+      },
+      "data_center": {
+        "type": "string",
+        "title": "Data Center",
+        "description": "The LiveKit data center to use (if applicable)",
+        "order": 4
+      },
+      "start_date": {
+        "type": "string",
+        "title": "Start Date",
+        "description": "UTC date and time in the format 2020-01-01T00:00:00Z. Any data before this date will not be replicated.",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)?$",
+        "examples": ["2021-01-01", "2021-01-01T00:00:00Z"],
+        "format": "date-time",
+        "order": 5
+      },
+      "streams": {
+        "type": "array",
+        "title": "Streams",
+        "description": "List of streams to sync. If not specified, all available streams will be synced.",
+        "items": {
+          "type": "string",
+          "enum": ["rooms", "participants", "quality_metrics", "events", "usage"]
+        },
+        "default": ["rooms", "participants", "quality_metrics", "events", "usage"],
+        "order": 6
+      }
+    }
+  }
+}

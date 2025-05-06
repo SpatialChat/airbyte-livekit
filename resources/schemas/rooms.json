@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "room_id": {
+      "type": "string",
+      "description": "Unique identifier for the room"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the room"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of when the record was created (in milliseconds since epoch)"
+    },
+    "participant_count": {
+      "type": "integer",
+      "description": "Number of participants in the room"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the room was created"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the room session in seconds"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the room is currently active"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata associated with the room"
+    }
+  },
+  "required": ["room_id", "timestamp"]
+}

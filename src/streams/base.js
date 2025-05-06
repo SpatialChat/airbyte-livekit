@@ -18,7 +18,11 @@ class BaseStream {
     this.streamConfig = streamConfig;
     this.state = state || {};
     this.streamName = this.constructor.name.replace('Stream', '').toLowerCase();
-    this.logger = logger;
+    
+    // Set up logger with custom level if provided in config
+    this.logger = config && config.log_level ? 
+      logger.createLogger(config.log_level) : 
+      logger;
   }
 
   /**

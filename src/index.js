@@ -44,11 +44,12 @@ async function spec() {
  */
 async function check(configJson) {
   try {
-    // Validate config schema
-    config.validateConfig(configJson);
+    // Merge with defaults and validate config schema
+    const mergedConfig = config.mergeWithDefaults(configJson);
+    config.validateConfig(mergedConfig);
     
     // Try a simple API call to verify credentials and connectivity
-    const roomsStream = new RoomsStream(configJson);
+    const roomsStream = new RoomsStream(mergedConfig);
     await roomsStream.testConnection();
     
     console.log(JSON.stringify({ status: 'SUCCEEDED' }));
@@ -66,13 +67,16 @@ async function check(configJson) {
  * @param {Object} configJson - The configuration
  */
 async function discover(configJson) {
+  // Merge with defaults
+  const mergedConfig = config.mergeWithDefaults(configJson);
+  
   const catalog = {
     streams: []
   };
 
   // For each stream, add its schema to the catalog
   for (const [streamName, StreamClass] of Object.entries(AVAILABLE_STREAMS)) {
-    const stream = new StreamClass(configJson);
+    const stream = new StreamClass(mergedConfig);
     const schema = stream.getJsonSchema();
     
     catalog.streams.push({
@@ -96,8 +100,9 @@ async function discover(configJson) {
  */
 async function read(configJson, catalogJson, stateJson = {}) {
   try {
-    // Validate the config
-    config.validateConfig(configJson);
+    // Merge with defaults and validate the config
+    const mergedConfig = config.mergeWithDefaults(configJson);
+    config.validateConfig(mergedConfig);
     
     // Get the selected streams from the catalog
     const selectedStreams = catalogJson.streams.filter(
@@ -116,7 +121,7 @@ async function read(configJson, catalogJson, stateJson = {}) {
       // Initialize the stream with config and state
       const StreamClass = AVAILABLE_STREAMS[streamName];
       const stream = new StreamClass(
-        configJson,
+        mergedConfig,
         streamConfig,
         stateJson[streamName]
       );

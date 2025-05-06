@@ -3,8 +3,14 @@
  */
 const winston = require('winston');
 
-const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
+/**
+ * Create a logger instance
+ * @param {string} level - Log level (default: 'info')
+ * @returns {Object} Winston logger instance
+ */
+function createLogger(level = 'info') {
+  return winston.createLogger({
+    level: level,
   format: winston.format.combine(
     winston.format.timestamp(),
     winston.format.json()
@@ -20,14 +26,10 @@ const logger = winston.createLogger({
   ]
 });
 
-// If we're in a non-production environment, also log to the console with a simpler format
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.simple()
-    )
-  }));
 }
 
-module.exports = logger;
+// Create and export default logger instance
+const defaultLogger = createLogger();
+
+module.exports = defaultLogger;
+module.exports.createLogger = createLogger;

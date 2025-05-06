@@ -33,6 +33,20 @@ This connector allows you to extract data from LiveKit's real-time communication
 
 ## Configuration
 
+### Airbyte Web UI Configuration
+
+This connector can be configured through the Airbyte Web UI. When adding the connector in the Airbyte UI, you will need to provide the following information:
+
+1. **API Key**: Your LiveKit API key
+2. **API Secret**: Your LiveKit API secret
+3. **Project ID** (optional): Your LiveKit project ID if applicable
+4. **API Endpoint URL**: The LiveKit API endpoint URL (default: `https://api.livekit.io`)
+5. **Data Center** (optional): The LiveKit data center to use
+6. **Start Date**: The UTC date from which to start replicating data (format: `2020-01-01T00:00:00Z`)
+7. **Streams**: The streams to sync (default: all available streams)
+
+### Environment Variable Configuration (Legacy)
+
 ### Source Configuration
 
 | Field | Description | Required | Default |
